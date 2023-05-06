@@ -1,5 +1,6 @@
 package com.mpedroni.springtodoapi.services;
 
+import com.mpedroni.springtodoapi.exceptions.TodoListNotFoundException;
 import com.mpedroni.springtodoapi.models.TodoList;
 import com.mpedroni.springtodoapi.repositories.TodoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,11 @@ public class TodoListServiceImpl implements TodoListService {
     @Override
     public TodoList createTodoList(TodoList todoList) {
         return this.todoListRepository.save(todoList);
+    }
+
+    @Override
+    public TodoList getTodoListById(Long id) {
+        return this.todoListRepository.findById(id)
+                .orElseThrow(() -> new TodoListNotFoundException(id));
     }
 }

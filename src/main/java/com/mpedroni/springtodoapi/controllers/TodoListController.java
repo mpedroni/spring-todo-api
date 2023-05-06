@@ -17,6 +17,12 @@ public class TodoListController {
         this.todoListService = todoListService;
     }
 
+    @GetMapping("{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public TodoList getTodoListById(@PathVariable("id") long id) {
+        return this.todoListService.getTodoListById(id);
+    }
+
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public TodoList createTodoList(@RequestBody TodoList todoList) {
