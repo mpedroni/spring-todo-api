@@ -41,4 +41,12 @@ public class TodoListServiceImpl implements TodoListService {
 
         return this.todoListRepository.save(existingTodoList);
     }
+
+    @Override
+    public void deleteTodoListById(long id) {
+        this.todoListRepository.findById(id)
+                .orElseThrow(() -> new TodoListNotFoundException(id));
+
+        this.todoListRepository.deleteById(id);
+    }
 }

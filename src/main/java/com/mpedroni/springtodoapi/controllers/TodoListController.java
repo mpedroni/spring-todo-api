@@ -40,4 +40,10 @@ public class TodoListController {
     public TodoList updateTodoList(@PathVariable("id") long id, @RequestBody TodoList todoList) {
         return this.todoListService.updateTodoList(id, todoList);
     }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteTodoListById(@PathVariable("id") long id) {
+        this.todoListService.deleteTodoListById(id);
+    }
 }

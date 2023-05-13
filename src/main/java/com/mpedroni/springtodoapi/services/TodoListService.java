@@ -10,4 +10,6 @@ public interface TodoListService {
     Iterable<TodoList> getTodoLists();
 
     TodoList updateTodoList(long id, TodoList todoList);
+
+    void deleteTodoListById(long id);
 }
