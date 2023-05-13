@@ -8,4 +8,6 @@ public interface TodoListService {
     TodoList getTodoListById(Long id);
 
     Iterable<TodoList> getTodoLists();
+
+    TodoList updateTodoList(long id, TodoList todoList);
 }

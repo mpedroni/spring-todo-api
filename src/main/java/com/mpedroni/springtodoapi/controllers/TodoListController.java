@@ -34,4 +34,10 @@ public class TodoListController {
     public TodoList createTodoList(@RequestBody TodoList todoList) {
         return this.todoListService.createTodoList(todoList);
     }
+
+    @PutMapping("{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public TodoList updateTodoList(@PathVariable("id") long id, @RequestBody TodoList todoList) {
+        return this.todoListService.updateTodoList(id, todoList);
+    }
 }

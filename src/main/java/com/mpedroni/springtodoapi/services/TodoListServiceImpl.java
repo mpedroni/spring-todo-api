@@ -31,4 +31,14 @@ public class TodoListServiceImpl implements TodoListService {
     public Iterable<TodoList> getTodoLists() {
         return this.todoListRepository.findAll();
     }
+
+    @Override
+    public TodoList updateTodoList(long id, TodoList todoList) {
+        TodoList existingTodoList = this.todoListRepository.findById(id)
+                .orElseThrow(() -> new TodoListNotFoundException(id));
+
+        existingTodoList.setTitle(todoList.getTitle());
+
+        return this.todoListRepository.save(existingTodoList);
+    }
 }
