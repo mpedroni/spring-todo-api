@@ -23,6 +23,12 @@ public class TodoListController {
         return this.todoListService.getTodoListById(id);
     }
 
+    @GetMapping
+    @ResponseStatus(value = HttpStatus.OK)
+    public Iterable<TodoList> getAllTodoLists() {
+        return this.todoListService.getTodoLists();
+    }
+
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public TodoList createTodoList(@RequestBody TodoList todoList) {

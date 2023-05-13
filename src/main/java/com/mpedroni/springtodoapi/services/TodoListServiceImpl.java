@@ -26,4 +26,9 @@ public class TodoListServiceImpl implements TodoListService {
         return this.todoListRepository.findById(id)
                 .orElseThrow(() -> new TodoListNotFoundException(id));
     }
+
+    @Override
+    public Iterable<TodoList> getTodoLists() {
+        return this.todoListRepository.findAll();
+    }
 }
