@@ -14,5 +14,7 @@ public interface TodoListService {
 
     void deleteTodoListById(long id);
 
-    Todo createTodoInTodoList(long id, Todo todo);
+    Todo createTodoInTodoList(long todoListId, Todo todo);
+
+    void deleteTodoById(long todoId);
 }

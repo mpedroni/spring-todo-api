@@ -55,14 +55,22 @@ public class TodoListServiceImpl implements TodoListService {
     }
 
     @Override
-    public Todo createTodoInTodoList(long id, Todo todo) {
-        TodoList existingTodoList = this.todoListRepository.findById(id)
-                .orElseThrow(() -> new TodoListNotFoundException(id));
+    public Todo createTodoInTodoList(long todoListId, Todo todo) {
+        TodoList existingTodoList = this.todoListRepository.findById(todoListId)
+                .orElseThrow(() -> new TodoListNotFoundException(todoListId));
 
         todo.setTodoList(existingTodoList);
-        
+
         this.todoRepository.save(todo);
 
         return todo;
+    }
+
+    @Override
+    public void deleteTodoById(long todoId) {
+        this.todoRepository.findById(todoId)
+                .orElseThrow(() -> new RuntimeException("Todo with id " + todoId + " not found."));
+
+        this.todoRepository.deleteById(todoId);
     }
 }

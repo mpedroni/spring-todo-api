@@ -16,7 +16,13 @@ public class TodoController {
     }
 
     @PostMapping()
-    public Todo createTodo(@PathVariable("todoListId") long id, @RequestBody Todo todo) {
-        return this.todoListService.createTodoInTodoList(id, todo);
+    public Todo createTodo(@PathVariable("todoListId") long todoListId, @RequestBody Todo todo) {
+        return this.todoListService.createTodoInTodoList(todoListId, todo);
     }
+
+    @DeleteMapping("{todoId}")
+    public void deleteTodoById(@PathVariable("todoId") long todoId) {
+        this.todoListService.deleteTodoById(todoId);
+    }
+
 }
