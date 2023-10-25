@@ -1,5 +1,6 @@
 package com.mpedroni.springtodoapi.services;
 
+import com.mpedroni.springtodoapi.models.Todo;
 import com.mpedroni.springtodoapi.models.TodoList;
 
 public interface TodoListService {
@@ -12,4 +13,6 @@ public interface TodoListService {
     TodoList updateTodoList(long id, TodoList todoList);
 
     void deleteTodoListById(long id);
+
+    Todo createTodoInTodoList(long id, Todo todo);
 }

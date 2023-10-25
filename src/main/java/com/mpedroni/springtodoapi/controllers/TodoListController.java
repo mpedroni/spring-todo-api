@@ -1,5 +1,6 @@
 package com.mpedroni.springtodoapi.controllers;
 
+import com.mpedroni.springtodoapi.models.Todo;
 import com.mpedroni.springtodoapi.models.TodoList;
 import com.mpedroni.springtodoapi.services.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,10 @@ public class TodoListController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteTodoListById(@PathVariable("id") long id) {
         this.todoListService.deleteTodoListById(id);
+    }
+
+    @PostMapping("{id}/todos")
+    public Todo createTodo(@PathVariable("id") long id, @RequestBody Todo todo) {
+        return this.todoListService.createTodoInTodoList(id, todo);
     }
 }
