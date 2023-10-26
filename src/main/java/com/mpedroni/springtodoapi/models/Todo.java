@@ -8,11 +8,15 @@ import lombok.Getter;
 @Entity
 @Table(name = "todos")
 public class Todo {
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TodoStatus status = TodoStatus.PENDING;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String description;
 
     @ManyToOne
@@ -37,5 +41,17 @@ public class Todo {
 
     public void setTodoList(TodoList todoList) {
         this.todoList = todoList;
+    }
+
+    public void doing() {
+        this.status = TodoStatus.DOING;
+    }
+
+    public void done() {
+        this.status = TodoStatus.DONE;
+    }
+
+    public void pending() {
+        this.status = TodoStatus.PENDING;
     }
 }
