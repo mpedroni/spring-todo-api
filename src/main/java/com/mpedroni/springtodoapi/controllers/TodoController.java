@@ -1,5 +1,6 @@
 package com.mpedroni.springtodoapi.controllers;
 
+import com.mpedroni.springtodoapi.controllers.dtos.UpdateTodoDTO;
 import com.mpedroni.springtodoapi.models.Todo;
 import com.mpedroni.springtodoapi.services.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class TodoController {
     @DeleteMapping("{todoId}")
     public void deleteTodoById(@PathVariable("todoId") long todoId) {
         this.todoListService.deleteTodoById(todoId);
+    }
+
+    @PutMapping("{todoId}")
+    public Todo updateTodoById(@PathVariable("todoId") long todoId, @RequestBody UpdateTodoDTO dto) {
+        return this.todoListService.updateTodoById(todoId, dto);
     }
 
 }

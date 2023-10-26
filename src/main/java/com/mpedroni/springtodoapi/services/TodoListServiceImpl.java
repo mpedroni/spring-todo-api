@@ -1,5 +1,6 @@
 package com.mpedroni.springtodoapi.services;
 
+import com.mpedroni.springtodoapi.controllers.dtos.UpdateTodoDTO;
 import com.mpedroni.springtodoapi.exceptions.TodoListNotFoundException;
 import com.mpedroni.springtodoapi.models.Todo;
 import com.mpedroni.springtodoapi.models.TodoList;
@@ -72,5 +73,23 @@ public class TodoListServiceImpl implements TodoListService {
                 .orElseThrow(() -> new RuntimeException("Todo with id " + todoId + " not found."));
 
         this.todoRepository.deleteById(todoId);
+    }
+
+    @Override
+    public Todo updateTodoById(long todoId, UpdateTodoDTO dto) {
+        var todo = this.todoRepository.findById(todoId)
+                .orElseThrow(() -> new RuntimeException("Todo with id " + todoId + " not found."));
+
+        dto.description().ifPresent(todo::setDescription);
+
+        dto.status().ifPresent(status -> {
+            switch (status) {
+                case DOING -> todo.doing();
+                case DONE -> todo.done();
+                case PENDING -> todo.pending();
+            }
+        });
+
+        return this.todoRepository.save(todo);
     }
 }
