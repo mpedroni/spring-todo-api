@@ -7,6 +7,8 @@ import com.mpedroni.springtodoapi.models.TodoList;
 import com.mpedroni.springtodoapi.repositories.TodoListRepository;
 import com.mpedroni.springtodoapi.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,8 +35,8 @@ public class TodoListServiceImpl implements TodoListService {
     }
 
     @Override
-    public Iterable<TodoList> getTodoLists() {
-        return this.todoListRepository.findAll();
+    public Page<TodoList> getTodoLists(Pageable pageable) {
+        return this.todoListRepository.findAll(pageable);
     }
 
     @Override

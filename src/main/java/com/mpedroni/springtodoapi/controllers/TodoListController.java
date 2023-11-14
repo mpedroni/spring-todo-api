@@ -3,6 +3,7 @@ package com.mpedroni.springtodoapi.controllers;
 import com.mpedroni.springtodoapi.models.TodoList;
 import com.mpedroni.springtodoapi.services.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,9 @@ public class TodoListController {
 
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
-    public Iterable<TodoList> getAllTodoLists() {
-        return this.todoListService.getTodoLists();
+    public Iterable<TodoList> getAllTodoLists(@RequestParam(defaultValue = "1") int page) {
+        var pageable = PageRequest.of(page - 1, 10);
+        return this.todoListService.getTodoLists(pageable);
     }
 
     @PostMapping

@@ -9,6 +9,5 @@ To-do list API implementation using Java 17 & Spring Boot 3.0
     - [x] create
     - [x] update
     - [x] delete
-- [ ] order to-do's by creation date and status
-- [ ] lazy fetch todo list's to-do's
+- [x] order to-do's by creation date and status
 - [ ] Error handling
