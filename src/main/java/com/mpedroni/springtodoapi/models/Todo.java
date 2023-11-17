@@ -1,5 +1,6 @@
 package com.mpedroni.springtodoapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,6 +29,7 @@ public class Todo {
 
     @ManyToOne
     @JoinColumn(name = "todo_list_id", nullable = false)
+    @JsonIgnore
     private TodoList todoList;
 
     @CreationTimestamp(source = SourceType.DB)

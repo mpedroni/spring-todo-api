@@ -1,6 +1,5 @@
 package com.mpedroni.springtodoapi.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -8,7 +7,8 @@ import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -21,10 +21,9 @@ public class TodoList {
     @Column
     private String title;
 
-    @OneToMany(mappedBy = "todoList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "todoList", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OrderBy("status, createdAt")
-    @JsonIgnore
-    private Set<Todo> todos;
+    private List<Todo> todos = new LinkedList<>();
 
     @CreationTimestamp(source = SourceType.DB)
     private Instant createdAt = Instant.now();
@@ -47,7 +46,7 @@ public class TodoList {
         this.title = title;
     }
 
-    public void setTodos(Set<Todo> todos) {
+    public void setTodos(List<Todo> todos) {
         this.todos = todos;
     }
 
