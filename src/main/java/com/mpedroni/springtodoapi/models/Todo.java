@@ -1,13 +1,12 @@
 package com.mpedroni.springtodoapi.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
+import java.time.Instant;
 
 @Getter
 @Entity
@@ -29,14 +28,13 @@ public class Todo {
 
     @ManyToOne
     @JoinColumn(name = "todo_list_id", nullable = false)
-    @JsonBackReference
     private TodoList todoList;
 
     @CreationTimestamp(source = SourceType.DB)
-    private Date createdAt;
+    private Instant createdAt;
 
     @UpdateTimestamp(source = SourceType.DB)
-    private Date updatedAt;
+    private Instant updatedAt;
 
     public Todo() {
     }
@@ -45,11 +43,11 @@ public class Todo {
         this.todoList = todoList;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 

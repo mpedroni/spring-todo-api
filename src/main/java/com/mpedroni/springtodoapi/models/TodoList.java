@@ -1,6 +1,6 @@
 package com.mpedroni.springtodoapi.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,8 +22,8 @@ public class TodoList {
     private String title;
 
     @OneToMany(mappedBy = "todoList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
     @OrderBy("status, createdAt")
+    @JsonIgnore
     private Set<Todo> todos;
 
     @CreationTimestamp(source = SourceType.DB)
